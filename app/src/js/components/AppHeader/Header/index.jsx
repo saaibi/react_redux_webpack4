@@ -11,7 +11,7 @@ class Header extends Component {
             <div>
                 <nav>
                     <div className="nav-wrapper">
-                        <a href="#!" className="brand-logo">{name}</a>
+                        <a href="/" className="brand-logo">{name}</a>
                         <a href="#" data-target="slide-out" className="sidenav-trigger"><i className="material-icons">menu</i></a>
                         {isLoggedIn ? <HeaderUser menu="nav" /> : <HeaderNoUser menu="nav" />}
                     </div>
