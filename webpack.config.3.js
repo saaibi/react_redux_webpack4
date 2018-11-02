@@ -2,7 +2,6 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CleanWebpackPlugin = require("clean-webpack-plugin");
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const autoprefixer = require("autoprefixer")();
 
 // > Root App
 const APP_FOLDER = path.resolve(__dirname, './app');
@@ -51,35 +50,31 @@ module.exports = (env, options) => {
                     },
                 },
                 {
-                    test: /\.(css|scss)?$/,
-                    use: ExtractTextPlugin.extract({
-                        fallback: 'style-loader/url!file-loader',
-                        use: [
-                            {
-                                loader: "css-loader",
-                                options: {
-                                    sourceMap: isDevMode
-                                }
-                            },
-                            {
-                                loader: "sass-loader",
-                                options: {
-                                    sourceMap: isDevMode
-                                }
-                            },
-                            {
-                                loader: "postcss-loader",
-                                options: {
-                                    plugins: [
-                                        autoprefixer
-                                    ],
-                                    sourceMap: isDevMode
-                                }
+                    test: /\.scss$/,
+                    use: [
+                        "style-loader",
+                        {
+                            loader: "css-loader",
+                            options: {
+                                sourceMap: isDevMode
                             }
-                        ],
-                        publicPath: DIST_FOLDER_STYLE,
-                    }),
-
+                        },
+                        {
+                            loader: "postcss-loader",
+                            options: {
+                                plugins: [
+                                    require("autoprefixer")()
+                                ],
+                                sourceMap: isDevMode
+                            }
+                        },
+                        {
+                            loader: "sass-loader",
+                            options: {
+                                sourceMap: isDevMode
+                            }
+                        }
+                    ]
                 },
                 {
                     test: /\.(ttf|eot|woff|woff2)$/,
@@ -110,11 +105,11 @@ module.exports = (env, options) => {
             new HtmlWebpackPlugin({
                 template: srcPathExtend("index.html")
             }),
-            new ExtractTextPlugin({
-                filename: DIST_FILE_CSS_BUNDLE,
-                disable: false,
-                allChunks: true,
-            }),
+            // new ExtractTextPlugin({
+            //     filename: DIST_FILE_CSS_BUNDLE,
+            //     disable: false,
+            //     allChunks: true,
+            // }),
         ],
         devServer: {
             historyApiFallback: true,
