@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Form from './Form';
-import AppHeader from '../../AppHeader';
 
 import { userActions } from "../../../actions/user.actions";
 
@@ -12,13 +11,13 @@ class AppLogin extends Component {
         submitted: false
     }
 
-    handleChange = (event) => {
-        const { name, value } = event.target;
+    handleChange = (e) => {
+        const { name, value } = event.e;
         this.setState({ [name]: value });
     }
 
-    handleSubmit = (event) => {
-        event.preventDefault();
+    handleSubmit = (e) => {
+        e.preventDefault();
         this.setState({ submitted: true });
         const { email, password } = this.state;
         const { dispatch } = this.props;
@@ -38,19 +37,24 @@ class AppLogin extends Component {
         this.props.dispatch(userActions.logout());
     }
     render() {
-        const { loggingIn } = this.props;
-        const { email, password, submitted } = this.state;
         return (
-            <div className="container">
-                <AppHeader name="LOGIN" />
-                <Form handleChange={this.handleChange} handleSubmit={this.handleSubmit} />
+            <div className="jumbotron">
+                <div className="container login">
+                    <div className="card">
+                        <div className="card-body">
+                            <div className="row justify-content-center">
+                                <img className="mb-4" src="/app/public/images/logo-unum-header.png" alt="" />
+                            </div>
+                            <Form handleChange={this.handleChange} handleSubmit={this.handleSubmit} />
+                        </div>
+                    </div>
+                </div>
             </div>
         )
     }
 }
 
 const mapStateToProps = (state) => {
-    console.log(state)
     return {
         loggingIn: state.authentication,
         registering: state.authentication

@@ -12,18 +12,17 @@ import { AppLogin } from "../components/Authentication/Login";
 import { AppResult } from "../components/Results/RoutComp";
 
 const Routes = () => {
+  console.log(history)
   return (
-    <div>
-      <Router history={history}>
-        <div>
-          <Header name="LPA" />
-          <PrivateRoute exact path="/" component={HomePage} />
-          <Route path="/register" component={AppRegister} />
-          <Route path="/login" component={AppLogin} />
-          <Route path="/results" component={AppResult} />
-        </div>
-      </Router>
-    </div>
+    <Router history={history}>
+      <div>
+        {history.location.pathname != "/login" ? <Header name="LPA" /> : ''}
+        <PrivateRoute exact path="/" component={HomePage} />
+        <Route path="/register" component={AppRegister} />
+        <Route path="/login" component={AppLogin} />
+        <Route path="/results" component={AppResult} />
+      </div>
+    </Router>
   )
 }
 

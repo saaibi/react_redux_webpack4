@@ -5,11 +5,12 @@ import Icons from '../Icons';
 
 const Input = ({ id, name, value, text, type, autoFocus, className, classNameInput, classNameLabel, placeholder, onChange, icon, classNameIcon }) => {
 	return (
-		<div className={`input-field ${className}`}>
+		<div className={`form-group ${className}`}>
 			{icon && (<Icons
 				className={classNameIcon}
 				icon={icon}
 			/>)}
+			{classNameLabel && (<label htmlFor={id} className={classNameLabel}>{text}</label>)}
 			<input
 				id={id}
 				name={name}
@@ -20,15 +21,11 @@ const Input = ({ id, name, value, text, type, autoFocus, className, classNameInp
 				placeholder={placeholder}
 				onChange={onChange}
 			/>
-			<label htmlFor={id} className={classNameLabel}>{text}</label>
 		</div>
 	);
 };
 
 Input.defaultProps = {
-	className: 'col s12',
-	classNameInput: "validate",
-	classNameLabel: 'active',
 	type: 'text',
 	autoFocus: false
 };

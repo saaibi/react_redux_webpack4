@@ -10,9 +10,8 @@ const Fields = (props) => (
 			name="email"
 			text="Email"
 			type="email"
-			className="col s6 offset-s3"
-			icon="email"
-			classNameIcon="prefix"
+			placeholder="Usuario"
+			classNameInput="form-control"
 			onChange={props.handleChange}
 		/>
 		<Password
@@ -20,9 +19,8 @@ const Fields = (props) => (
 			name="password"
 			text="Password"
 			type="password"
-			className="col s6 offset-s3"
-			icon="fingerprint"
-			classNameIcon="prefix"
+			placeholder="Contraseña"
+			classNameInput="form-control"
 			onChange={props.handleChange}
 		/>
 	</div>
